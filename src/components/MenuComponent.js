@@ -15,22 +15,28 @@ function RenderMenuItem ({ dish, onClick }){
 }
 
     const Menu = (props) => {
-        const menu = props.dishes.map((dish) => {
-            return(
-                <div key={dish.id} className="col-12 col-md-5 m-1">
-                   <RenderMenuItem dish={dish} onClick={props.onClick} />
+        if (props.dishes){
+            const menu = props.dishes.map((dish) => {
+                return(
+                    <div key={dish.id} className="col-12 col-md-5 m-1">
+                       <RenderMenuItem dish={dish} onClick={props.onClick} />
+                    </div>
+                );
+            });
+            return (
+                <div className="container">
+                    <div className="row">
+                        {menu}
+                    </div>
                 </div>
             );
-        });
+        }
+        else{        
+            return(
+                <div></div>
 
-        return (
-            <div className="container">
-                <div className="row">
-                    {menu}
-                </div>
-            </div>
-        );
-
+            );
+        }
     }
 
     
