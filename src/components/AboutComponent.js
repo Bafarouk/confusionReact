@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 
 
 
-const RenderLeader = (props) =>  {
+const RenderLeader = ({leaders}) =>  {
 
-    const leader = props.leaders.map((leader)=>{
+    const leader = leaders.map((leader)=>{
         return(
             <Media key={leader.id} list>
                 <Media tag="li">
