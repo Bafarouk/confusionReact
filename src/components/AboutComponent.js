@@ -15,8 +15,7 @@ const RenderLeader = ({leaders}) =>  {
                     </Media>
                     <Media body>
                         <Media heading>
-                            {leader.name}
-                            
+                            {leader.name} 
                         </Media>
                         <Media body>
                         {leader.designation}
