@@ -1,5 +1,5 @@
 import React ,{Component} from 'react';
-import {Breadcrumb,BreadcrumbItem,Button,Form,FormGroup,Label,Input,Col} from 'reactstrap';
+import {Breadcrumb,BreadcrumbItem,Button,Form,FormGroup,Label,Input,Col , FormFeedback , Row} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
 class Contact extends Component{
@@ -13,7 +13,13 @@ class Contact extends Component{
             email:'',
             agree:false,
             contactType:'Tel.',
-            message:''
+            message:'',
+            touched:{
+                firstname:false,
+                lastname:false,
+                telnum:false,
+                email: false
+            }
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -33,6 +39,24 @@ class Contact extends Component{
         console.log("Current State is:" + JSON.stringify(this.state));
         alert("Current State is:" + JSON.stringify(this.state));
         event.preventDefault();
+    }
+
+    handleBlur = (field) => (event) => {
+            this.setState({
+                touched: { ...this.state.touched ,[field]: true}
+            });
+
+    }
+
+    validate(firstname,lastname,telnum,email){
+        const touched= {
+            firstname:'',
+            lastname:'',
+            telnum:'',
+            email:''
+        }
+
+        
     }
 
 
@@ -80,7 +104,7 @@ class Contact extends Component{
                         <h3>Send us Your Feedback</h3>
                     </div>
                     <div className="col-12 col-md-9">
-                        <form onSubmit={this.handleSubmit}>
+                        <Form onSubmit={this.handleSubmit}>
                             <FormGroup row>
                                 <Label htmlFor="firstname" md={2}>First Name</Label>
                                 <Col md={10}>
@@ -155,7 +179,7 @@ class Contact extends Component{
                                 </Col>
                             </FormGroup>
 
-                        </form>
+                        </Form>
                     </div>
                 </div>
             </div>
