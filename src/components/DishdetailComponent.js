@@ -20,7 +20,7 @@ import {Row , Col , ModalBody , ModalHeader , Modal , Label ,Button} from 'react
         }
 
 
-    function RenderComments({comments}) {
+    function RenderComments({comments , addComment , dishId}) {
         const commentss= comments.map((comment)=> {
                 return(
                 <div>
@@ -36,7 +36,8 @@ import {Row , Col , ModalBody , ModalHeader , Modal , Label ,Button} from 'react
             <div>
                 <h4>Comments</h4>
                 {commentss}
-                <CommentForm />
+                <CommentForm dishId={dishId}
+                             addComment={addComment} />
             </div>
         );
     }
@@ -64,8 +65,7 @@ import {Row , Col , ModalBody , ModalHeader , Modal , Label ,Button} from 'react
     
     
         handleComment(values){
-            console.log("Current State is:" + JSON.stringify(values));
-            alert("Current State is:" + JSON.stringify(values));
+            this.props.addComment(this.props.dishId, values.rating , values.author , values.comment);
             this.setState({
                 isModalOpen : !this.state.isModalOpen
             });
@@ -171,7 +171,9 @@ import {Row , Col , ModalBody , ModalHeader , Modal , Label ,Button} from 'react
                         <RenderDish dish={props.dish} />
                     </div>
                     <div className="col-12 col-md-5 m-1">
-                        <RenderComments comments={props.comments} />
+                        <RenderComments comments={props.comments}
+                                        addComment={props.addComment}
+                                        dishId={props.dish.id} />
                         
                     </div>
                 </div>
