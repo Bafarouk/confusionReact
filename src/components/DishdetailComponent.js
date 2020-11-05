@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import { LocalForm , Control , Errors } from 'react-redux-form';
 import {Row , Col , ModalBody , ModalHeader , Modal , Label ,Button} from 'reactstrap';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 
 
@@ -11,7 +12,7 @@ import { Loading } from './LoadingComponent';
     function RenderDish({dish}){
             return(
             <Card>
-                <CardImg width="100%" src={dish.image} alt={dish.name}/>
+                <CardImg width="100%" src={ baseUrl + dish.image} alt={dish.name}/>
                 <CardBody>
                     <CardTitle><h4>{dish.name}</h4></CardTitle>
                     <CardText>{dish.description}</CardText> 
