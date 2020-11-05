@@ -22,7 +22,7 @@ import { baseUrl } from '../shared/baseUrl';
         }
 
 
-    function RenderComments({comments , addComment , dishId}) {
+    function RenderComments({comments , postComment , dishId}) {
         const commentss= comments.map((comment)=> {
                 return(
                 <div>
@@ -39,7 +39,7 @@ import { baseUrl } from '../shared/baseUrl';
                 <h4>Comments</h4>
                 {commentss}
                 <CommentForm dishId={dishId}
-                             addComment={addComment} />
+                             postComment={postComment} />
             </div>
         );
     }
@@ -67,7 +67,7 @@ import { baseUrl } from '../shared/baseUrl';
     
     
         handleComment(values){
-            this.props.addComment(this.props.dishId, values.rating , values.author , values.comment);
+            this.props.postComment(this.props.dishId, values.rating , values.author , values.comment);
             this.setState({
                 isModalOpen : !this.state.isModalOpen
             });
@@ -192,7 +192,7 @@ import { baseUrl } from '../shared/baseUrl';
                     </div>
                     <div className="col-12 col-md-5 m-1">
                         <RenderComments comments={props.comments}
-                                        addComment={props.addComment}
+                                        postComment={props.postComment}
                                         dishId={props.dish.id} />
                         
                     </div>
