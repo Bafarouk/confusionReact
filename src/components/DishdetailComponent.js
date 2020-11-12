@@ -5,39 +5,47 @@ import { LocalForm , Control , Errors } from 'react-redux-form';
 import {Row , Col , ModalBody , ModalHeader , Modal , Label ,Button} from 'reactstrap';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import {FadeTransform, Fade , Stagger } from 'react-animation-components'; 
 
 
 
 
     function RenderDish({dish}){
             return(
-            <Card>
-                <CardImg width="100%" src={ baseUrl + dish.image} alt={dish.name}/>
-                <CardBody>
-                    <CardTitle><h4>{dish.name}</h4></CardTitle>
-                    <CardText>{dish.description}</CardText> 
-                </CardBody>
-            </Card>
+            <FadeTransform in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+            }} >    
+                <Card>
+                    <CardImg width="100%" src={ baseUrl + dish.image} alt={dish.name}/>
+                    <CardBody>
+                        <CardTitle><h4>{dish.name}</h4></CardTitle>
+                        <CardText>{dish.description}</CardText> 
+                    </CardBody>
+                </Card>
+            </FadeTransform>
             ); 
         }
 
 
     function RenderComments({comments , postComment , dishId}) {
-        const commentss= comments.map((comment)=> {
-                return(
-                <div>
-                    <ul className="list-unstyled">
-                        <li>{comment.comment}</li><br/>
-                <li>-- {comment.author} , { new Intl.DateTimeFormat('en-US',{year:'numeric' , month:'short', day:'2-digit' }).format(new Date(Date.parse(comment.date))) }</li>
-                    </ul>
-                </div>
-               );
-            });
-
             return (
             <div>
                 <h4>Comments</h4>
-                {commentss}
+                <ul className="list-unstyled">
+                    <Stagger in>
+                        {comments.map((comment) => {
+                            return (
+                                <Fade in>
+                                    <li key={comment.id}>
+                                        <p>{comment.comment}</p>
+                                        <p>-- {comment.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
+                                    </li>
+                                </Fade>
+                            );
+                        })}
+                    </Stagger>
+                </ul>
                 <CommentForm dishId={dishId}
                              postComment={postComment} />
             </div>
